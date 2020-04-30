@@ -108,6 +108,3 @@ variable "service_port" {
 variable "access_port" {
   default = 22
 }
-
-
-
