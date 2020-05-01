@@ -6,7 +6,7 @@ resource "aws_instance" "my-ec2-instance" {
   instance_type               = var.aws_instance_type
   vpc_security_group_ids      = var.security_groups
   subnet_id                   = var.aws_subnet_id
-  key_name                    = var.keyname
+  key_name                    = var.key_name
   user_data                   = var.user_data
   monitoring                  = false
   ebs_optimized               = false
@@ -28,8 +28,8 @@ resource "aws_instance" "my-ec2-instance" {
 }
 
 resource "aws_key_pair" "my-aws-keys" {
-  key_name   = var.keyname
-  public_key = var.publickey
+  key_name   = var.key_name
+  public_key = var.public_key
 
   tags = {
     owner       = var.owner

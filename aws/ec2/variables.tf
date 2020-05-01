@@ -32,7 +32,7 @@ variable "aws_subnet_id" {
   type        = string
 }
 
-variable "keyname" {
+variable "key_name" {
   type        = string
   description = "The key name you want to use to ssh to the instances you create. You must have the private key of the keyname you wish to use in your .ssh folder locally"
 }
@@ -88,7 +88,7 @@ variable "include_count_in_hostname" {
 
 # Key Pair Variables
 
-variable "publickey" {
+variable "public_key" {
   type        = string
   description = "The public key you want to use to ssh to the instances you create. You must have the private key of the keyname you wish to use in your .ssh folder locally"
 }
