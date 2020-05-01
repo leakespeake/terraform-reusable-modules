@@ -1,3 +1,10 @@
+# Providers
+
+variable "region" {
+  type        = string
+  description = "The region to run the EC2 Instances in"
+}
+
 # EC2 Instance Variables
 
 variable "node_count" {}
