@@ -28,12 +28,6 @@ variable "aws_instance_type" {
   description = "The type of instance to start. Updates to this field will trigger a stop/start of the EC2 instance."
 }
 
-#variable "security_groups" {
-#  description = "List of Security Group IDs allowed to connect to the instance"
-#  type        = list
-#  default     = []
-#}
-
 variable "aws_subnet_id" {
   description = "Subnet IDs that ec2 instances will run in. The subnet IDs must match to the corresponding azs - e.g. subnet-fe717e96 is in us-east-2a & subnet-c46e2bbe is in us-east-2b"
   default     = "data.aws_subnet_ids.default.ids"
@@ -53,11 +47,6 @@ variable "public_ip" {
   description = "Associate a public ip address with an instance in a VPC."
   default     = false
 }
-
-#variable "iam_instance_profile" {
-#  description = "The role to attach to your EC2 instances"
-#  type = "string"
-#}
 
 variable "root_volume_type" {
   type        = string
