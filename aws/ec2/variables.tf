@@ -36,7 +36,7 @@ variable "aws_instance_type" {
 
 variable "aws_subnet_id" {
   description = "Subnet IDs that ec2 instances will run in. The subnet IDs must match to the corresponding azs - e.g. subnet-fe717e96 is in us-east-2a & subnet-c46e2bbe is in us-east-2b"
-  type        = string
+  default     = "data.aws_subnet_ids.default.ids"
 }
 
 variable "key_name" {
