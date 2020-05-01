@@ -1,8 +1,8 @@
 # Providers
 
 variable "region" {
-  type        = string
   description = "The region to run the EC2 Instances in"
+  default     = "us-east-2"
 }
 
 # EC2 Instance Variables

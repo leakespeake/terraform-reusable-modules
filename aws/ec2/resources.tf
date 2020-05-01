@@ -11,7 +11,6 @@ resource "aws_instance" "my-ec2-instance" {
   monitoring                  = false
   ebs_optimized               = false
   associate_public_ip_address = var.public_ip
-  #iam_instance_profile        = var.iam_instance_profile
 
   root_block_device {
     volume_type           = var.root_volume_type
@@ -68,4 +67,3 @@ resource "aws_security_group" "my-sg-group" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
-
