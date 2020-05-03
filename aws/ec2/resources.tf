@@ -5,7 +5,7 @@ resource "aws_instance" "my-ec2-instance" {
   ami                         = var.machine_ami
   instance_type               = var.aws_instance_type
   vpc_security_group_ids      = [aws_security_group.my-sg-group.id]
-  subnet_id                   = var.aws_subnet_id
+  #subnet_id                   = data.aws_subnet_ids.default.ids
   key_name                    = var.key_name
   user_data                   = var.user_data
   monitoring                  = false
