@@ -5,9 +5,8 @@ resource "aws_instance" "my-ec2-instance" {
   ami                         = var.machine_ami
   instance_type               = var.aws_instance_type
   vpc_security_group_ids      = [aws_security_group.my-sg-group.id]
-  #subnet_id                   = data.aws_subnet_ids.default.ids
   key_name                    = var.key_name
-  user_data                   = var.user_data
+  user_data                   = data.template_file.user_data.rendered       # read from the 'template_file' data source below
   monitoring                  = false
   ebs_optimized               = false
   associate_public_ip_address = var.public_ip
@@ -24,6 +23,15 @@ resource "aws_instance" "my-ec2-instance" {
     App         = "${var.app}.${var.environment}"
     Name        = "${var.app}.${var.environment}${local.include_count_in_hostname ? format("%02d", count.index+var.node_start_number) : ""}"
   }
+}
+
+  data "template_file" "user_data" {
+    template = file("${path.module}/ubuntu-bootstrap.sh")
+
+    # state variables for interpolation within the template (DRY)
+    vars = {
+        service_port = var.service_port
+    }
 }
 
 resource "aws_key_pair" "my-aws-keys" {
