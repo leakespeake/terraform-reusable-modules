@@ -6,7 +6,7 @@ resource "aws_instance" "my-ec2-instance" {
   instance_type               = var.aws_instance_type
   vpc_security_group_ids      = [aws_security_group.my-sg-group.id]
   key_name                    = var.key_name
-  #user_data                   = data.template_file.user_data.rendered       # read from the 'template_file' data source below
+  user_data                   = data.template_file.user_data.rendered
   monitoring                  = false
   ebs_optimized               = false
   associate_public_ip_address = var.public_ip
@@ -24,15 +24,6 @@ resource "aws_instance" "my-ec2-instance" {
     Name        = "${var.app}.${var.environment}${local.include_count_in_hostname ? format("%02d", count.index+var.node_start_number) : ""}"
   }
 }
-
-#  data "template_file" "user_data" {
-#    template = file("${path.module}/ubuntu-bootstrap.sh")
-#
-    # state variables for interpolation within the template (DRY)
-#    vars = {
-#        service_port = var.service_port
-#    }
-#}
 
 resource "aws_key_pair" "my-aws-keys" {
   key_name   = var.key_name
@@ -55,8 +46,8 @@ resource "aws_security_group" "my-sg-group" {
     }
 
   ingress {
-    from_port   = var.service_port
-    to_port     = var.service_port
+    from_port   = var.service_port1
+    to_port     = var.service_port1
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }

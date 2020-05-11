@@ -28,20 +28,14 @@ variable "aws_instance_type" {
   description = "The type of instance to start. Updates to this field will trigger a stop/start of the EC2 instance."
 }
 
-#variable "aws_subnet_id" {
-#  type        = string
-#  description = "Subnet IDs that ec2 instances will run in. The subnet IDs must match to the corresponding azs - e.g. subnet-fe717e96 is in us-east-2a & subnet-c46e2bbe is in us-east-2b"
-#  default     = "data.aws_subnet_ids.default.ids"
-#}
-
 variable "key_name" {
   type        = string
   description = "The key name you want to use to ssh to the instances you create. You must have the private key of the keyname you wish to use in your .ssh folder locally"
 }
 
 variable "user_data" {
-  description = "userdata used to bootstrap the node"
   type        = string
+  description = "userdata used to bootstrap the node"
 }
 
 variable "public_ip" {
@@ -98,7 +92,7 @@ variable "security_group_name" {
   type = string
 }
 
-variable "service_port" {
+variable "service_port1" {
   default = 8080
 }
 
