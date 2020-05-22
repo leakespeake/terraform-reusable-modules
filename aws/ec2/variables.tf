@@ -1,8 +1,7 @@
-# Providers
-
 variable "region" {
+  type        = string
   description = "The region to run the EC2 Instances in"
-  default     = "us-east-2"
+  default	  = "eu-west-2"
 }
 
 # EC2 Instance Variables
@@ -14,9 +13,26 @@ variable "node_start_number" {
 }
 
 variable "azs" {
-  type        = string
-  description = "The Availability Zone to run the EC2 Instances in"
+  description = "Run the EC2 Instances in these Availability Zones"
+  type        = list(string)
 }
+
+variable "aws_subnet_id" {
+  type        = string
+  description = "The subnet to run the EC2 Instances in"
+}
+
+variable "private_ip" {
+  description = "Private IP address to associate with the instance in a VPC"
+  type        = string
+  default     = null
+}
+
+variable "private_ips" {
+  description = "A list of private IP address to associate with the instance in a VPC. Should match the number of instances."
+  type        = list(string)
+  default     = []
+}	
 
 variable "machine_ami" {
   type        = string
