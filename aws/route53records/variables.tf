@@ -35,6 +35,7 @@ variable "include_count_in_hostname" {
 }
 
 variable "record_data" {
-  type        = list(string)
+  type        = list
   description = "The Elastic IPs - computed attributes when creating ec2 instances"
+  default     = [0]
 }

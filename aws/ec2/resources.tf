@@ -7,7 +7,11 @@ resource "aws_instance" "my-ec2-instance" {
   instance_type               = var.aws_instance_type
   vpc_security_group_ids      = [aws_security_group.my-sg-group.id]
   key_name                    = var.key_name
-  user_data                   = data.template_file.user_data.rendered
+  
+ #user_data                   = data.template_file.user_data_centos.rendered			# bootstrap-centos.sh
+ #user_data                   = data.template_file.user_data_coreos.rendered			# bootstrap-coreos.sh
+  user_data                   = data.template_file.user_data_ubuntu.rendered			# bootstrap-ubuntu.sh
+  
   monitoring                  = false
   ebs_optimized               = false
   associate_public_ip_address = var.public_ip
