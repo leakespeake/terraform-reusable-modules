@@ -54,6 +54,11 @@ variable "user_data" {
   description = "userdata used to bootstrap the node"
 }
 
+variable "os_distro" {
+  type    	  = string
+  description = "Choose centos coreos or ubuntu to load the appropriate template file"
+}
+
 variable "public_ip" {
   description = "Associate a public ip address with an instance in a VPC."
   default     = false
