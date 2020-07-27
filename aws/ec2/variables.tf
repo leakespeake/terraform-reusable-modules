@@ -120,3 +120,7 @@ variable "service_port1" {
 variable "access_port" {
   default = 22
 }
+
+variable "docker_api_port" {
+  default = 2376
+}

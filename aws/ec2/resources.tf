@@ -60,6 +60,13 @@ resource "aws_security_group" "my-sg-group" {
     cidr_blocks = ["92.238.177.185/32"]
   }
 
+  ingress {
+    from_port   = var.docker_api_port
+    to_port     = var.docker_api_port
+    protocol    = "tcp"
+    cidr_blocks = ["92.238.177.185/32"]
+  }
+
   egress {
     from_port   = 0
     to_port     = 0
