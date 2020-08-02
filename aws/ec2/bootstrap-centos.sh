@@ -26,7 +26,7 @@ sudo systemctl start firewalld
 
 sleep 10
 
-# ensure the Docker daemon is available via any network interface on port 2376 (but restricted to my source public IP via UFW and the EC2 Security Group)
+# ensure the Docker daemon is available via any network interface on port 2376 (but restricted to my source public IP via firewalld and the EC2 Security Group)
 echo "ENABLE REMOTE DOCKER API"
 sudo mkdir /etc/systemd/system/docker.service.d
 sudo tee /etc/systemd/system/docker.service.d/override.conf << EOF
