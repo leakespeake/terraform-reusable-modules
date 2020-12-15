@@ -57,14 +57,14 @@ resource "aws_security_group" "my-sg-group" {
     from_port   = var.access_port
     to_port     = var.access_port
     protocol    = "tcp"
-    cidr_blocks = ["92.238.177.185/32"]
+    cidr_blocks = ["92.238.177.233/32"]
   }
 
   ingress {
     from_port   = var.docker_api_port
     to_port     = var.docker_api_port
     protocol    = "tcp"
-    cidr_blocks = ["92.238.177.185/32"]
+    cidr_blocks = ["92.238.177.233/32"]
   }
 
   egress {
