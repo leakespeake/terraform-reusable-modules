@@ -13,7 +13,6 @@ variable log_driver {
 
 # docker provider - used to interact with docker containers and images via docker api (:2376) at configured host
 provider "docker" {
-  version = "~> 2.0"
   host    = "tcp://${var.docker_host}:2376/"
 }
 
@@ -25,7 +24,7 @@ data "docker_registry_image" "blackbox-exporter" {
 # docker image to be pulled from dockerhub via the "docker_registry_image" data source above
 resource "docker_image" "blackbox-exporter" {
   name          = data.docker_registry_image.blackbox-exporter.name
-  pull_triggers = ["${data.docker_registry_image.blackbox-exporter.sha256_digest}"]
+  pull_triggers = [data.docker_registry_image.blackbox-exporter.sha256_digest]
 }
 
 # docker container lifecycle
