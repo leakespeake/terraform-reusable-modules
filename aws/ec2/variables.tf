@@ -59,6 +59,11 @@ variable "os_distro" {
   description = "Choose centos coreos or ubuntu to load the appropriate template file"
 }
 
+variable "file_ext" {
+  type    	  = string
+  description = "Choose sh or yaml to load the appropriate template file"
+}
+
 variable "public_ip" {
   description = "Associate a public ip address with an instance in a VPC."
   default     = false
@@ -114,13 +119,19 @@ variable "security_group_name" {
 }
 
 variable "service_port1" {
-  default = 8080
+  description = "The first port intended to allow access to the running service - add additional as required _port2, _port3 etc"
+  type        = number
+  default     = 8080
 }
 
 variable "access_port" {
-  default = 22
+  description = "SSH"
+  type        = number
+  default     = 22
 }
 
 variable "docker_api_port" {
-  default = 2376
+  description = "The remote Docker API - allowing comms to the Docker daemon"
+  type        = number
+  default     = 2376
 }

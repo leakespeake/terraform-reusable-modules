@@ -1,8 +1,8 @@
 resource "aws_instance" "my-ec2-instance" {
   count                       = var.node_count
   availability_zone           = element(var.azs, count.index)
-  subnet_id					  = var.aws_subnet_id
-  private_ip				  = length(var.private_ips) > 0 ? element(var.private_ips, count.index) : var.private_ip
+  subnet_id					          = var.aws_subnet_id
+  private_ip				          = length(var.private_ips) > 0 ? element(var.private_ips, count.index) : var.private_ip
   ami                         = var.machine_ami
   instance_type               = var.aws_instance_type
   vpc_security_group_ids      = [aws_security_group.my-sg-group.id]

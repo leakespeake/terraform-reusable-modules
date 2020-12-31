@@ -5,8 +5,9 @@
 # base applications such as Docker CE and Python 3 should be baked into the Packer template (or deployed separately with Ansible)
 # additional configuration to be done by Ansible to automate tasks specific for a nodes intended purpose
 
+# use for centos or ubuntu deployments
 data "template_file" "user-data" {
-  template = file("${path.module}/bootstrap-${var.os_distro}.sh")
+  template = file("${path.module}/bootstrap-${var.os_distro}.${var.file_ext}")
 
   vars = {
     access_port     = var.access_port
