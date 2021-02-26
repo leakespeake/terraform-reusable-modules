@@ -1,36 +1,40 @@
-variable "instances_ids" {
-  type        = list(string)
-  description = "These ids are computed attributes when created ec2 instances. They must be known beforehand"
-  default     = []
+# PROVIDER VARIABLES
+
+variable "region" {
+  description = "The region to set for the aws provider in versions.tf"
+  type        = string
+  default     = "eu-west-2"
 }
 
+# RESOURCE VARIABLES
+
 variable "node_count" {
-  description = "Number of nodes to attach elastic ips too."
+  description = "The number of nodes to attach elastic ips to"
   default     = 0
 }
 
-variable "node_start_number" {
-  default = 1
+variable "instances_ids" {
+  description = "These ids are computed attributes when creating ec2 instances - pulled from the ec2 module"
+  type        = list(string)
+  default     = []
 }
 
-#AWS TAG Variables
+# TAG VARIABLES
 
 variable "owner" {
+  description = "Owner of the instances"
   type        = string
-  description = "Owner of the instances. The name of this variable will be given when you have onboarded on "
+  default     = "barry"
 }
 
 variable "environment" {
+  description = "Environment that the instances reside - dev, stage or prod"
   type        = string
-  description = "Environment of the instance e.g. dev, stage or production"
+  default     = "stage"
 }
 
 variable "app" {
+  description = "Name of application hosted on instances"
   type        = string
-  description = "Name of application hosted on instances - e.g. Cassandra"
-}
-
-variable "include_count_in_eip_name" {
-  description = "should the count be appended to the eip name? e.g. myvm01 vs myvm. setting this to false has no effect when master_count is greater than 1"
-  default     = true
+  default     = "nginx"
 }

@@ -1,41 +1,43 @@
-variable "node_count" {}
+# PROVIDER VARIABLES
 
-variable "node_start_number" {
+variable "region" {
+  description = "The region to set for the aws provider in versions.tf"
+  type        = string
+  default     = "eu-west-2"
+}
+
+# RESOURCE VARIABLES
+
+variable "node_count" {
+  description = "The number of instances to deploy"
   default = 1
 }
 
 variable "node_name" {
+  description = "The base name of the resulting VM(s)"
   type        = string
-  description = "Base name of the node - e.g. myinstance"
-}
-
-variable "zone_id" {
-  type        = string
-  description = "The Zone ID of the DNS Zone you wish to create a DNS record against. This must already be created and registered"
+  default     = "demo"
 }
 
 variable "type" {
+  description = "The type of record to create (A, MX, CNAME, AAAA etc)"
   type        = string
-  description = "The type of record you want to create (e.g. A, MX, CNAME ...)"
+  default     = "A"
 }
 
 variable "dns_domain" {
+  description = "The domain name of the DNS zone you are creating records in"
   type        = string
-  description = "Domain name of the DNS Zone you are creating A records to - e.g. demo01.leakespeake.com"
+  default     = "leakespeake.com"
 }
 
 variable "ttl" {
-  description = "The TTL of the record."
+  description = "The TTL of the record"
   default     = 300
 }
 
-variable "include_count_in_hostname" {
-  description = "should the count be appended to the basename? e.g. myvm01 vs myvm. setting this to false has no effect when master_count is greater than 1"
-  default     = true
-}
-
 variable "record_data" {
-  type        = list
   description = "The Elastic IPs - computed attributes when creating ec2 instances"
+  type        = list
   default     = [0]
 }
