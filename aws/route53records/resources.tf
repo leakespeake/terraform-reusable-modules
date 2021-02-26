@@ -1,9 +1,10 @@
 resource "aws_route53_record" "demo_dns_record" {
+  # utilize the 'count' parameter to create an array of resources
   count   = var.node_count
-  zone_id = var.zone_id
-  name    = "${var.node_name}${local.include_count_in_hostname ? format("%02d", count.index+var.node_start_number) : ""}.${var.dns_domain}"
+  # utilize {count.index + 1} to start the sequential numbering from '01' in the array index (not '00')
+  name    = "${var.node_name}-0${count.index + 1}.${var.dns_domain}"
+  zone_id = data.aws_route53_zone.leakespeake-com.zone_id
   type    = var.type
   ttl     = var.ttl
-  records = var.record_data 
-  #records = var.record_data[count.index]
+  records = var.record_data
 }

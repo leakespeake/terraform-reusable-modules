@@ -1,9 +1,9 @@
 output "domain_name" {
-  value       = "${var.domain_name}"
-  description = "Domain name for the hosted zoned in R53."
+  description = "Domain name of the hosted zone in Route 53"
+  value       = var.domain_name
 }
 
 output "primary_public_zone_id" {
-  value       = "${aws_route53_zone.primary.zone_id}"
-  description = "R53 hosted zone ID."
+  description = "Route 53 hosted zone ID"
+  value       = aws_route53_zone.primary.zone_id
 }
