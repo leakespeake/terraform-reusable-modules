@@ -1,15 +1,16 @@
+# PROVIDER VARIABLES
+
 variable "region" {
+  description = "The region to set for the aws provider in versions.tf"
   type        = string
-  description = "The region to run the EC2 Instances in"
-  default	  = "eu-west-2"
+  default     = "eu-west-2"
 }
 
-# EC2 Instance Variables
+# RESOURCE VARIABLES
 
-variable "node_count" {}
-
-variable "node_start_number" {
-  default = 1
+variable "node_count" {
+  description = "The number of nodes to deploy"
+  default     = 0
 }
 
 variable "azs" {
@@ -18,8 +19,8 @@ variable "azs" {
 }
 
 variable "aws_subnet_id" {
+  description = "The subnet to run the EC2 Instances in - see var.private_ips"
   type        = string
-  description = "The subnet to run the EC2 Instances in"
 }
 
 variable "private_ip" {
@@ -29,49 +30,49 @@ variable "private_ip" {
 }
 
 variable "private_ips" {
-  description = "A list of private IP address to associate with the instance in a VPC. Should match the number of instances."
+  description = "A list of private IP addresses to associate with the VPC instances - match the number of instances and the subnet CIDR"
   type        = list(string)
   default     = []
 }	
 
 variable "machine_ami" {
+  description = "AMI ID of the image you want to use. The ID must be available in the region you are deploying to"
   type        = string
-  description = "ami ID of the image you want to use. The ID must be available in the region you are deploying too"
 }
 
 variable "aws_instance_type" {
+  description = "The type of instance to start. Updates to this field will trigger a stop/start of the EC2 instance"
   type        = string
-  description = "The type of instance to start. Updates to this field will trigger a stop/start of the EC2 instance."
 }
 
 variable "key_name" {
+  description = "The key name you want to use to ssh to the new instance. You must have the private key of the keyname you wish to use in your local .ssh folder"
   type        = string
-  description = "The key name you want to use to ssh to the instances you create. You must have the private key of the keyname you wish to use in your .ssh folder locally"
 }
 
 variable "user_data" {
+  description = "The userdata used to bootstrap the node"
   type        = string
-  description = "userdata used to bootstrap the node"
 }
 
 variable "os_distro" {
-  type    	  = string
   description = "Choose centos coreos or ubuntu to load the appropriate template file"
+  type        = string
 }
 
 variable "file_ext" {
-  type    	  = string
   description = "Choose sh or yaml to load the appropriate template file"
+  type        = string
 }
 
 variable "public_ip" {
-  description = "Associate a public ip address with an instance in a VPC."
+  description = "Associate a public ip address with an instance in a VPC"
   default     = false
 }
 
 variable "root_volume_type" {
-  type        = string
   description = "The type of EBS volume - standard (magnetic), general purpose ssd (gp2), iops ssd (io1), cold hdd (sc1), throughput optimized hdd (st1)"
+  type        = string
   default     = "standard"
 }
 
@@ -80,38 +81,34 @@ variable "root_volume_size" {
   default     = 10
 }
 
-
-#TAG Variables
+# TAG VARIABLES
 
 variable "owner" {
-  type        = string
   description = "Owner of the instances"
+  type        = string
+  default     = "barry"
 }
 
 variable "environment" {
+  description = "Environment that the instances reside - dev, stage or prod"
   type        = string
-  description = "Environment of the instance i.e. stage or production"
+  default     = "stage"
 }
 
 variable "app" {
+  description = "Name of application hosted on instances"
   type        = string
-  description = "Name of application hosted on instances - e.g. Cassandra"
+  default     = "nginx"
 }
 
-variable "include_count_in_hostname" {
-  description = "should the count be appended to the basename? e.g. myvm01 vs myvm. setting this to false has no effect when master_count is greater than 1"
-  default     = true
-}
-
-# Key Pair Variables
+# KEY PAIR VARIABLES
 
 variable "public_key" {
-  type        = string
   description = "The public key you want to use to ssh to the instances you create. You must have the private key of the keyname you wish to use in your .ssh folder locally"
+  type        = string
 }
 
-
-# Security Group Variables
+# SECURITY GROUP VARIABLES
 
 variable "security_group_name" {
   description = "The name of your Security Group"

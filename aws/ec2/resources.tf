@@ -1,7 +1,10 @@
 resource "aws_instance" "my-ec2-instance" {
+  # utilize the 'count' parameter to create an array of resources
   count                       = var.node_count
+  # utilize the 'element' function to retrieve a single element from a list (var.azs)
   availability_zone           = element(var.azs, count.index)
   subnet_id					          = var.aws_subnet_id
+  # utilize the 'length' function to return the number of items in the array then retrieve a single value from the list via 'element'
   private_ip				          = length(var.private_ips) > 0 ? element(var.private_ips, count.index) : var.private_ip
   ami                         = var.machine_ami
   instance_type               = var.aws_instance_type
@@ -21,8 +24,7 @@ resource "aws_instance" "my-ec2-instance" {
   tags = {
     owner       = var.owner
     environment = var.environment
-    App         = "${var.app}.${var.environment}"
-    Name        = "${var.app}.${var.environment}${local.include_count_in_hostname ? format("%02d", count.index+var.node_start_number) : ""}"
+    app         = "${var.app}-${var.environment}"
   }
 }
 
@@ -33,7 +35,7 @@ resource "aws_key_pair" "my-aws-keys" {
   tags = {
     owner       = var.owner
     environment = var.environment
-    App         = "${var.app}.${var.environment}"
+    app         = "${var.app}.${var.environment}"
     }
 }
 
@@ -43,7 +45,7 @@ resource "aws_security_group" "my-sg-group" {
   tags = {
     owner       = var.owner
     environment = var.environment
-    App         = "${var.app}.${var.environment}"
+    app         = "${var.app}.${var.environment}"
     }
 
   ingress {

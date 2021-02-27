@@ -1,19 +1,32 @@
-variable "node_count" {}
+# PROVIDER VARIABLES
+
+variable "region" {
+  description = "The region to set for the aws provider in versions.tf"
+  type        = string
+  default     = "eu-west-2"
+}
+
+# RESOURCE VARIABLES
+
+variable "node_count" {
+  description = "The number of instances to deploy"
+  default = 1
+}
 
 variable "instances_ids" {
+  description = "These ids are computed attributes when creating ec2 instances"
   type        = list
-  description = "These ids are computed attributes when creating ec2 instances. They must be known beforehand"
   default     = []
 }
 
 variable "volume_ids" {
+  description = "These ids are computed attributes when creating ebs volumes"
   type        = list
-  description = "These ids are computed attributes when creating ebs volumes. They must be known beforehand"
   default     = []
 }
 
 variable "device_name" {
+  description = "The device name to expose to the instance, such as /dev/sdh or xvdh"
   type = string
-  description = "The device name to expose to the instance (for example, /dev/sdh or xvdh)"
   default = "/dev/xvdb"
 }

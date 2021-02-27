@@ -1,12 +1,21 @@
-variable "node_count" {}
+# PROVIDER VARIABLES
 
-variable "node_start_number" {
+variable "region" {
+  description = "The region to set for the aws provider in versions.tf"
+  type        = string
+  default     = "eu-west-2"
+}
+
+# RESOURCE VARIABLES
+
+variable "node_count" {
+  description = "The number of instances to deploy"
   default = 1
 }
 
 variable "ebs_volume_type" {
   type        = string
-  description = "The type of EBS volume. Can be 'standard', 'gp2', 'io1', 'sc1' or 'st1'"
+  description = "The type of EBS volume - 'standard', 'gp2', 'io1', 'sc1' or 'st1'"
   default     = "gp2"
 }
 
@@ -16,27 +25,27 @@ variable "ebs_volume_size" {
 }
 
 variable "azs" {
-  description = "deploy these EBS volumes in these Availability Zones"
+  description = "Deploy these EBS volumes only in these Availability Zones"
   type        = list(string)
   default     = ["eu-west-1a", "eu-west-1b"]
 }
 
-variable "environment" {
-  type        = string
-  description = "Environment of the EBS volume e.g. dev, stage or production"
-}
+# TAG VARIABLES
 
 variable "owner" {
+  description = "Owner of the EBS volumes"
   type        = string
-  description = "Owner of the EBS volumes. The name of this variable will be given when you have onboarded on "
+  default     = "barry"
+}
+
+variable "environment" {
+  description = "Environment that the EBS volume resides - dev, stage or prod"
+  type        = string
+  default     = "stage"
 }
 
 variable "app" {
+  description = "Name of application hosted on the EBS volume"
   type        = string
-  description = "Name of application hosted on attached to the volume - e.g. Cassandra"
-}
-
-variable "include_count_in_ebs_name" {
-  description = "should the count be appended to the ebs name? e.g. myvolume01 vs myvolume. setting this to false has no effect when master_count is greater than 1"
-  default     = true
+  default     = "nginx"
 }
