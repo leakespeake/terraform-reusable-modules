@@ -1,7 +1,7 @@
 resource "aws_eip" "demo-eip" {
-  instance  = var.instances_ids[count.index]
-  vpc       = true
+  instance  = element(var.instances_ids, count.index)
   count     = var.node_count
+  vpc       = true
 
   tags = {
     owner       = var.owner

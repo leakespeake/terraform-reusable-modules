@@ -33,6 +33,11 @@ variable "private_ips" {
   description = "A list of private IP addresses to associate with the VPC instances - match the number of instances and the subnet CIDR"
   type        = list(string)
   default     = []
+}
+
+variable "public_ip" {
+  description = "Associate an ethemeral public ip address with an instance in a VPC - or - use the aws_eip resource for a static Elastic IP"
+  default     = false
 }	
 
 variable "machine_ami" {
@@ -43,31 +48,12 @@ variable "machine_ami" {
 variable "aws_instance_type" {
   description = "The type of instance to start. Updates to this field will trigger a stop/start of the EC2 instance"
   type        = string
+  default	  = "t2.micro"
 }
 
 variable "key_name" {
   description = "The key name you want to use to ssh to the new instance. You must have the private key of the keyname you wish to use in your local .ssh folder"
   type        = string
-}
-
-variable "user_data" {
-  description = "The userdata used to bootstrap the node"
-  type        = string
-}
-
-variable "os_distro" {
-  description = "Choose centos coreos or ubuntu to load the appropriate template file"
-  type        = string
-}
-
-variable "file_ext" {
-  description = "Choose sh or yaml to load the appropriate template file"
-  type        = string
-}
-
-variable "public_ip" {
-  description = "Associate a public ip address with an instance in a VPC"
-  default     = false
 }
 
 variable "root_volume_type" {
@@ -79,6 +65,23 @@ variable "root_volume_type" {
 variable "root_volume_size" {
   description = "The size of the volume in GB"
   default     = 10
+}
+
+# INTERPOLATION
+
+variable "user_data" {
+  description = "The userdata used to bootstrap the node"
+  type        = string
+}
+
+variable "os_distro" {
+  description = "Choose 'centos' or 'ubuntu' to load the appropriate template file"
+  type        = string
+}
+
+variable "file_ext" {
+  description = "Choose sh or yaml to load the appropriate template file"
+  type        = string
 }
 
 # TAG VARIABLES
@@ -118,17 +121,17 @@ variable "security_group_name" {
 variable "service_port1" {
   description = "The first port intended to allow access to the running service - add additional as required _port2, _port3 etc"
   type        = number
-  default     = 8080
+  #default     = null
 }
 
 variable "access_port" {
   description = "SSH"
   type        = number
-  default     = 22
+  #default     = 22
 }
 
 variable "docker_api_port" {
   description = "The remote Docker API - allowing comms to the Docker daemon"
   type        = number
-  default     = 2376
+  #default     = 2376
 }

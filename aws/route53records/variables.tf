@@ -8,11 +8,6 @@ variable "region" {
 
 # RESOURCE VARIABLES
 
-variable "node_count" {
-  description = "The number of instances to deploy"
-  default = 1
-}
-
 variable "node_name" {
   description = "The base name of the resulting VM(s)"
   type        = string
@@ -39,5 +34,5 @@ variable "ttl" {
 variable "record_data" {
   description = "The Elastic IPs - computed attributes when creating ec2 instances"
   type        = list
-  default     = [0]
+  default     = []
 }
