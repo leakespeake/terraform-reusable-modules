@@ -1,3 +1,4 @@
+# requires a seperate root module for each DNS record 
 resource "aws_route53_record" "demo_dns_record" {
   name    = "${var.node_name}.${var.dns_domain}"
   zone_id = data.aws_route53_zone.leakespeake-com.zone_id

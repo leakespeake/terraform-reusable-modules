@@ -8,9 +8,10 @@ variable "region" {
 
 # RESOURCE VARIABLES
 
+# use a locals {} block in the root module to apply this value to all EC2 resources in this stack
 variable "node_count" {
   description = "The number of nodes to attach elastic ips to"
-  default     = 0
+  default     = 1
 }
 
 variable "instances_ids" {
@@ -19,7 +20,7 @@ variable "instances_ids" {
   default     = []
 }
 
-# TAG VARIABLES
+# TAG VARIABLES - use a locals {} block in the root module to apply these tag values to all EC2 resources in this stack
 
 variable "owner" {
   description = "Owner of the instances"

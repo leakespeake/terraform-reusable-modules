@@ -28,6 +28,7 @@ variable "dns_domain" {
 
 variable "ttl" {
   description = "The TTL of the record"
+  type        = number 
   default     = 300
 }
 

@@ -8,9 +8,17 @@ variable "region" {
 
 # RESOURCE VARIABLES
 
+# use a locals {} block in the root module to apply this value to all EC2 resources in this stack
 variable "node_count" {
   description = "The number of instances to deploy"
-  default = 1
+  type        = number
+  default     = 1
+}
+
+variable "device_name" {
+  description = "The device name to expose to the instance, such as /dev/sdh or xvdh"
+  type        = string
+  default     = "/dev/xvdb"
 }
 
 variable "instances_ids" {
@@ -23,10 +31,4 @@ variable "volume_ids" {
   description = "These ids are computed attributes when creating ebs volumes"
   type        = list
   default     = []
-}
-
-variable "device_name" {
-  description = "The device name to expose to the instance, such as /dev/sdh or xvdh"
-  type = string
-  default = "/dev/xvdb"
 }

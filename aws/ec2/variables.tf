@@ -8,11 +8,14 @@ variable "region" {
 
 # RESOURCE VARIABLES
 
+# use a locals {} block in the root module to apply this value to all EC2 resources in this stack
 variable "node_count" {
   description = "The number of nodes to deploy"
-  default     = 0
+  type        = number 
+  default     = 1
 }
 
+# use a locals {} block in the root module to apply this value to all EC2 resources in this stack
 variable "azs" {
   description = "Run the EC2 Instances in these Availability Zones"
   type        = list(string)
@@ -48,11 +51,11 @@ variable "machine_ami" {
 variable "aws_instance_type" {
   description = "The type of instance to start. Updates to this field will trigger a stop/start of the EC2 instance"
   type        = string
-  default	  = "t2.micro"
+  default	    = "t2.micro"
 }
 
 variable "key_name" {
-  description = "The key name you want to use to ssh to the new instance. You must have the private key of the keyname you wish to use in your local .ssh folder"
+  description = "Name the public key you want to use to ssh to the new instance. You must have the associated private key in your local .ssh folder"
   type        = string
 }
 
@@ -64,10 +67,11 @@ variable "root_volume_type" {
 
 variable "root_volume_size" {
   description = "The size of the volume in GB"
+  type        = number
   default     = 10
 }
 
-# INTERPOLATION
+# LOAD CORRECT TEMPLATEFILE FOR USER_DATA (match to the machine AMI chosen)
 
 variable "user_data" {
   description = "The userdata used to bootstrap the node"
@@ -75,16 +79,16 @@ variable "user_data" {
 }
 
 variable "os_distro" {
-  description = "Choose 'centos' or 'ubuntu' to load the appropriate template file"
+  description = "Choose 'centos' or 'ubuntu' to load the appropriate templatefile"
   type        = string
 }
 
 variable "file_ext" {
-  description = "Choose sh or yaml to load the appropriate template file"
+  description = "Choose 'sh' or 'yaml' to load the appropriate templatefile"
   type        = string
 }
 
-# TAG VARIABLES
+# TAG VARIABLES - use a locals {} block in the root module to apply these tag values to all EC2 resources in this stack
 
 variable "owner" {
   description = "Owner of the instances"
@@ -107,7 +111,7 @@ variable "app" {
 # KEY PAIR VARIABLES
 
 variable "public_key" {
-  description = "The public key you want to use to ssh to the instances you create. You must have the private key of the keyname you wish to use in your .ssh folder locally"
+  description = "The public key string to use to ssh to the instances. You must have the associated private key in your local .ssh folder"
   type        = string
 }
 
@@ -118,18 +122,21 @@ variable "security_group_name" {
   type = string
 }
 
+# pass to templatefile for variable interpolation (user_data bootstrap script)
 variable "service_port1" {
   description = "The first port intended to allow access to the running service - add additional as required _port2, _port3 etc"
   type        = number
   #default     = null
 }
 
+# pass to templatefile for variable interpolation (user_data bootstrap script) 
 variable "access_port" {
   description = "SSH"
   type        = number
   #default     = 22
 }
 
+# pass to templatefile for variable interpolation (user_data bootstrap script) 
 variable "docker_api_port" {
   description = "The remote Docker API - allowing comms to the Docker daemon"
   type        = number
