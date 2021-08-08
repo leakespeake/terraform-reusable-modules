@@ -1,8 +1,8 @@
 ![tf](https://user-images.githubusercontent.com/45919758/85199881-af381100-b2ea-11ea-96b2-cdf29fd0b712.png)
 # terraform-reusable-modules
-Re-usable module code for Terraform deployments in vSphere, AWS and GCP. Used as source modules for stage and production deployments in the **terraform-projects** repository.
+Child modules for Terraform deployments in AWS, GCP and vSphere home lab. Consumed by calling modules across stage and production in the **terraform-projects** repository.
 
-This repo uses tags that reflect the version of Terraform that it is currently compatible for. These tags can be used as the source ref in the **terraform-projects** root modules. 
+This repo uses tags that reflect the version of Terraform that it is currently compatible for. These tags can be used as the source ref in the **terraform-projects** calling / root modules. 
 
 After each major Terraform release, this source module code is tested, modified and then tagged as per example below;
 
