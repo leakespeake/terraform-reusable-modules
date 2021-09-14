@@ -23,20 +23,20 @@ variable "azs" {
 
 variable "aws_subnet_id" {
   description = "The subnet to run the EC2 Instances in - see var.private_ips"
-  type        = string
+  #type        = string
 }
 
-variable "private_ip" {
-  description = "Private IP address to associate with the instance in a VPC"
-  type        = string
-  default     = null
-}
+#variable "private_ip" {
+#  description = "Private IP address to associate with the instance in a VPC"
+#  type        = string
+#  default     = null
+#}
 
-variable "private_ips" {
-  description = "A list of private IP addresses to associate with the VPC instances - match the number of instances and the subnet CIDR"
-  type        = list(string)
-  default     = []
-}
+#variable "private_ips" {
+#  description = "A list of private IP addresses to associate with the VPC instances - match the number of instances and the subnet CIDR"
+#  type        = list(string)
+#  default     = []
+#}
 
 variable "public_ip" {
   description = "Associate an ethemeral public ip address with an instance in a VPC - or - use the aws_eip resource for a static Elastic IP"

@@ -2,20 +2,20 @@ resource "aws_instance" "my-ec2-instance" {
   # utilize the 'count' parameter to create an array of resources
   count                       = var.node_count 
   
-  # use the 'element' function to iterate through the var.azs list to retrieve a different availability zone value each time
-  # will wrap around if 'count' exceeds the number of list items
+  # use the 'element' function to iterate through the var.azs list to retrieve a different az value each time
+  # will wrap around if 'count' exceeds the number of list items - utilized to spread vms across az's for redundency
   availability_zone           = element(var.azs, count.index)
 
   # utilize the 'length' function to return the number of items in the array then retrieve a single value from the list via 'element'
-  private_ip				          = length(var.private_ips) > 0 ? element(var.private_ips, count.index) : var.private_ip
+  #private_ip				  = length(var.private_ips) > 0 ? element(var.private_ips, count.index) : var.private_ip
   
   associate_public_ip_address = var.public_ip  
-  subnet_id					          = var.aws_subnet_id  
+  subnet_id					  = var.aws_subnet_id
   ami                         = var.machine_ami
   instance_type               = var.aws_instance_type
   vpc_security_group_ids      = [aws_security_group.my-sg-group.id]
   key_name                    = var.key_name
-  user_data         	        = templatefile("${path.module}/bootstrap-${var.os_distro}.${var.file_ext}", {access_port = var.access_port, service_port1 = var.service_port1, docker_api_port = var.docker_api_port})
+  user_data         	      = templatefile("${path.module}/bootstrap-${var.os_distro}.${var.file_ext}", {access_port = var.access_port, service_port1 = var.service_port1, docker_api_port = var.docker_api_port})
   monitoring                  = false
   ebs_optimized               = false
 
@@ -26,7 +26,7 @@ resource "aws_instance" "my-ec2-instance" {
   }
 
   tags = {
-    Name		    = "${var.app}-${var.environment}-0${count.index + 1}"
+    Name		= "${var.app}-${var.environment}-0${count.index + 1}"
     owner       = var.owner
     environment = var.environment
     app         = "${var.app}-${var.environment}"
