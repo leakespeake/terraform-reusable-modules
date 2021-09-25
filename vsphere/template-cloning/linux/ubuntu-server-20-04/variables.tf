@@ -52,7 +52,7 @@ variable "template" {
 
 variable "folder" {
   description = "The path to the folder to put the VM in, relative to the datacenter that the resource pool is in"
-  default     = "Packer-built"
+  default     = "Packer-vms"
 }
 
 # VM RESOURCE VARIABLES
