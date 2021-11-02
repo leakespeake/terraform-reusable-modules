@@ -28,13 +28,13 @@ resource "vsphere_virtual_machine" "ubuntu-vm" {
     eagerly_scrub    = data.vsphere_virtual_machine.template.disks.0.eagerly_scrub
     thin_provisioned = data.vsphere_virtual_machine.template.disks.0.thin_provisioned
   }
-  
+
   # disk1 - unit_number is required for any disk other than the first (implicit) instance
   disk {
-    label			      = "disk1"
-	  size			      = var.disk1_size
-	  unit_number     = 1
-  }	
+    label       = "disk1"
+    size        = var.disk1_size
+    unit_number = 1
+  }
 
   # changing any option in 'clone' after creation forces a new resource
   clone {
