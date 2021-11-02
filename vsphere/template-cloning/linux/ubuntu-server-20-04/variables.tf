@@ -83,6 +83,11 @@ variable "nested_hv" {
   default     = true
 }
 
+variable "disk1_size" {
+  description = "The size in GB of disk 1"
+  default     = 25
+}
+
 # VM RESOURCE CUSTOMIZATION VARIABLES
 
 variable "domain" {
