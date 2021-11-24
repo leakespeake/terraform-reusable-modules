@@ -8,6 +8,9 @@ resource "vsphere_virtual_machine" "ubuntu-vm" {
   num_cpus = var.cpus
   memory   = var.memory
 
+  # expose the UUIDs of attached virtual disks to the vm, allowing access to them in the guest
+  enable_disk_uuid = true
+
   # if deploying a vm within a nested vsphere environment, you must enable the nested_hv_enabled argument to facilitate nested virtualization in the guest
   nested_hv_enabled = var.nested_hv
 
@@ -15,7 +18,7 @@ resource "vsphere_virtual_machine" "ubuntu-vm" {
   datastore_id     = data.vsphere_datastore.datastore.id
   guest_id         = data.vsphere_virtual_machine.template.guest_id
   scsi_type        = data.vsphere_virtual_machine.template.scsi_type
-
+  
   network_interface {
     network_id   = data.vsphere_network.network.id
     adapter_type = data.vsphere_virtual_machine.template.network_interface_types[0]
