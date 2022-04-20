@@ -60,6 +60,12 @@ resource "vsphere_virtual_machine" "ubuntu-vm" {
       dns_server_list = var.dns_servers
     }
   }
+  
+  # pre-existing annotations (notes) on the Packer template trigger a change (update in-place) on every 'terraform plan'
+  # terraform state pull | grep -E "annotation"
+  lifecycle {
+    ignore_changes = [annotation]
+  }
 }
 
 # using 'count' so require the 'element' function to retrieve single value from var.ipv4 list to assign 1 address per vm
