@@ -1,17 +1,17 @@
-# Ubuntu Server Deployment - 20.04
+# Ubuntu Server Deployment - 22.04
 
-This source module is designed to clone and deploy VMs from a **Ubuntu Server 20.04.2 LTS** Packer template. It provides a consistent and repeatable way to deploy Ubuntu Server VMs on, in this case, a nested vSphere 7 homelab. It uses the **vsphere** Terraform provider to deploy the cloned VMs within a vSphere 7 vCenter server. 
+This source module is designed to clone and deploy VMs from a **Ubuntu Server 22.04 LTS** Packer template. It provides a consistent and repeatable way to deploy Ubuntu Server VMs on, in this case, a nested vSphere 7 homelab. It uses the **vsphere** Terraform provider to deploy the cloned VMs within a vSphere 7 vCenter server. 
 
 It also uses the Hashicorp DNS provider to create A records on Windows DNS (AD server) for each VM. The configuration of this provider means that the setting for the forward lookup zone in Windows DNS must be set to: **Dynamic updates set to: Nonsecure and secure** then manually set back to the default of **Secure only** once the terraform apply operation completes. 
 
-The original Packer template creation can be referenced at; https://github.com/leakespeake/packer/tree/master/builders/vmware/vsphere-iso/ubuntu-server-20-04
+The original Packer template creation can be referenced at; https://github.com/leakespeake/packer/tree/master/builders/vmware/vsphere-iso/ubuntu-server-22-04
 
 ## Versions
 
-- Terraform --> 1.0.6
-- vSphere provider --> 2.0.2
-- Hashicorp DNS provider --> 3.2.1
-- vSphere vCenter --> 7.0.2
+- Terraform --> 1.2.2
+- vSphere provider --> 2.1.1
+- Hashicorp DNS provider --> 3.2.3
+- vSphere vCenter --> 7.0.3
 
 ## Use Case
 
@@ -30,5 +30,5 @@ Whilst building out the parent module it may be easier to set the **source** pat
 
 ```
 module "my-parent-module" {
-  source = "C:\Users\username\Documents\github-leakespeake\terraform-reusable-modules\vsphere\template-cloning\linux\ubuntu-server-20-04"
+  source = "C:/Users/username/Documents/github-leakespeake/terraform-reusable-modules/vsphere/template-cloning/linux/ubuntu-server-22-04"
 ```
