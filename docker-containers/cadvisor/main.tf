@@ -24,7 +24,7 @@ provider "docker" {
 # docker container lifecycle	
 resource "docker_container" "cadvisor" {
   name       = var.container_name
-  image      = docker_image.cadvisor.latest
+  image      = docker_image.cadvisor.image_id
   restart    = "unless-stopped"
   log_driver = var.log_driver
 
