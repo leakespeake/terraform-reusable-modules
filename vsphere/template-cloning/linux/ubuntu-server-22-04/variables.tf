@@ -83,9 +83,10 @@ variable "nested_hv" {
   default     = true
 }
 
-variable "disk1_size" {
-  description = "The size in GB of disk 1"
-  default     = 25
+# see dynamic block in main.tf - used to only create disk1 if consuming module sets this variable to true
+variable "disk1_create" {
+  type        = bool
+  default     = false
 }
 
 # VM RESOURCE CUSTOMIZATION VARIABLES

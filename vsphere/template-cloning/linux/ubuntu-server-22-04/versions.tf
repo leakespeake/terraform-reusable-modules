@@ -2,14 +2,14 @@ terraform {
   required_providers {
     vsphere = {
       source  = "hashicorp/vsphere"
-      version = "2.1.1"
+      version = "2.6.1"
     }
     dns = {
       source  = "hashicorp/dns"
-      version = "3.2.3"
+      version = "3.4.0"
     }
   }
-  required_version = ">= 1.2.2"
+  required_version = ">= 1.7.0"
 }
 
 provider "vsphere" {

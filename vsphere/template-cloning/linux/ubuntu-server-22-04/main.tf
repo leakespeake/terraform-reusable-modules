@@ -24,19 +24,23 @@ resource "vsphere_virtual_machine" "ubuntu-vm" {
     adapter_type = data.vsphere_virtual_machine.template.network_interface_types[0]
   }
 
-  # disk0 - source argument values from the packer template
+  # disk0 - source argument values from packer to clone from template
   disk {
     label            = "disk0"
     size             = data.vsphere_virtual_machine.template.disks.0.size
     eagerly_scrub    = data.vsphere_virtual_machine.template.disks.0.eagerly_scrub
     thin_provisioned = data.vsphere_virtual_machine.template.disks.0.thin_provisioned
+    unit_number = 0
   }
 
-  # disk1 - unit_number is required for any disk other than the first (implicit) instance
-  disk {
-    label       = "disk1"
-    size        = var.disk1_size
-    unit_number = 1
+  # disk1 - dynamic block used to only create disk1 if consuming module sets boolean variable 'disk1_create' to true 
+  dynamic "disk" {
+    for_each = var.disk1_create ? [1] : []
+    content {
+      label       = "disk${count.index + 1}"
+      size        = 25
+      unit_number = count.index + 1
+    }
   }
 
   # changing any option in 'clone' after creation forces a new resource
